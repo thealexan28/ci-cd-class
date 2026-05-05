@@ -2,7 +2,7 @@ name: GitHub Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -21,12 +21,11 @@ jobs:
 
       - name: Inject code into template
         run: |
-          python3 << 'EOF'
+          python3 -c "
           code = open('src.py').read()
           html = open('template.html').read().replace('{{CODE}}', code)
           open('index.html', 'w').write(html)
-          print("index.html generated successfully")
-          EOF
+          "
 
       - uses: actions/configure-pages@v5
 
