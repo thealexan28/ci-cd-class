@@ -8,11 +8,16 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11, 3.12]
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
         name: Setup UV
       
-      - run: uvx pytest test_code.py
+      - run: uvx --python ${{ matrix.python-version }} pytest test_code.py
         name: Run tests
