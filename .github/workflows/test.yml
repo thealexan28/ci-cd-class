@@ -14,5 +14,5 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         name: Setup UV
       
-      - run: echo "Testing with Python 3.12"
-      - run: ls -la
+      - run: uvx pytest test_code.py
+        name: Run tests
