@@ -21,11 +21,12 @@ jobs:
 
       - name: Inject code into template
         run: |
-          python3 -c "
+          python3 << 'EOF'
           code = open('src.py').read()
           html = open('template.html').read().replace('{{CODE}}', code)
           open('index.html', 'w').write(html)
-          "
+          print("index.html generated successfully")
+          EOF
 
       - uses: actions/configure-pages@v5
 
